@@ -1,0 +1,120 @@
+<form *ngIf="resume" [formGroup]="resume" (ngSubmit)="saveDetails()" class="d-flex justify-content-center align-items-center">
+    <div class="mb-3 d-flex w-25">
+        <h1>Resume Builder</h1>
+        <label for="Name" class="form-label"><b> Name : </b></label>
+        <div>
+            <input type="text" formControlName="Name" class="form-control" id="Name" placeholder="Enter Name">
+            <div *ngIf="resume.controls['Name']?.touched && resume.controls['Name'].errors?.['required']" class="form-text text-danger">This field is required.</div>
+        </div>
+    </div>
+
+    <div class="mb-3 d-flex w-25">
+        <label for="Description" class="form-label"><b>Profile :</b></label>
+        <div>
+            <input type="text" formControlName="Description" class="form-control" id="Description" placeholder="Profile Description">
+        </div>
+    </div>
+
+    <div class="mb-3 d-flex w-25">
+        <label for="Skills" class="form-label "><b>Tech-Skills :</b></label>
+        <div formArrayName="Skills" *ngFor="let Skills of this.getFormGroupArray('Skills').controls; let i = index">
+            <div class="flex-dis">
+                <input type="text" [formControlName]="i" class="form-control" id="Skills" placeholder="Enter Skills">
+                <button type="button" class="btn btn-outline-danger" (click)="deleteSkills(i)">
+                    delete
+                </button>
+            </div>
+        </div>
+        <button type="button" class="btn btn-outline-primary btn-sm w-25" (click)="addSkills()">Add</button>
+    </div>
+
+    <div class="mb-3 d-flex w-25">
+        <label for="Experience" class="form-label "><b>Experiences :</b></label>
+        <div *ngFor="let Experience of this.getFormGroupArray('Experience').controls; let i = index">
+            <div [formGroup]="this.getAsFormGroup(Experience)">
+                <div class="flex-dis justify-content">
+                    <label for="Company">Company : </label>
+                    <input type="text" formControlName="Company" id="Company">
+                    <div *ngIf="this.getAsFormGroup(Experience).controls['Company']?.touched && this.getAsFormGroup(Experience).controls['Company'].errors?.['required']" class="form-text text-danger">This field is required.
+                    </div>
+                </div>
+                <div class="flex-dis justify-content">
+                    <label for="JobRole">Job Role: </label>
+                    <input type="text" formControlName="JobRole" id="JobRole">
+                    <div *ngIf="this.getAsFormGroup(Experience).controls['JobRole']?.touched && this.getAsFormGroup(Experience).controls['JobRole'].errors?.['required']" class="form-text text-danger">This field is required.
+                    </div>
+                </div>
+                <div class="flex-dis justify-content">
+                    <label for="JobDesc">Job Description: </label>
+                    <input type="text" formControlName="JobDesc" id="JobDesc">
+                    <div *ngIf="this.getAsFormGroup(Experience).controls['JobDesc']?.touched && this.getAsFormGroup(Experience).controls['JobDesc'].errors?.['required']" class="form-text text-danger">This field is required.
+                    </div>
+                </div>
+                <div class="flex-dis justify-content">
+                    <label for="JoinYear">Start Year: </label>
+                    <input type="number" formControlName="JoinYear" id="JoinYear">
+                    <div *ngIf="this.getAsFormGroup(Experience).controls['JoinYear']?.touched && this.getAsFormGroup(Experience).controls['JoinYear'].errors?.['required']" class="form-text text-danger">This field is required.
+                    </div>
+                </div>
+                <div class="flex-dis justify-content">
+                    <label for="LeaveYear">End Year: </label>
+                    <input type="number" formControlName="LeaveYear" id="LeaveYear">
+                    <div *ngIf="this.getAsFormGroup(Experience).controls['LeaveYear']?.touched && this.getAsFormGroup(Experience).controls['LeaveYear'].errors?.['required']" class="form-text text-danger">This field is required.
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-outline-danger w-25" type="button" (click)="deleteExperience(i)">Delete</button>
+            </div>
+        </div>
+        <button type="button" class="btn btn-outline-primary btn-sm w-25" (click)="addExperience()">Add</button>
+    </div>
+
+
+    <div class="mb-3 d-flex w-25">
+        <label for="Education" class="form-label "><b>Education :</b></label>
+        <div *ngFor="let Education of this.getFormGroupArray('Education').controls; let i = index">
+            <div [formGroup]="this.getAsFormGroup(Education)">
+                <div class="flex-dis justify-content">
+                    <label for="University">University Name : </label>
+                    <input type="text" formControlName="University" id="University">
+                </div>
+                <div class="flex-dis justify-content">
+                    <label for="Degree">Degree : </label>
+                    <input type="text" formControlName="Degree" id="Degree">
+                </div>
+                <div class="flex-dis justify-content">
+                    <label for="GPA">Grade Points : </label>
+                    <input type="number" formControlName="GPA" id="GPA">
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-outline-danger w-25" type="button" (click)="deleteEducation(i)">Delete</button>
+            </div>
+        </div>
+        <button type="button" class="btn btn-outline-primary w-25" (click)="addEducation()">Add</button>
+    </div>
+
+    <div class="mb-3 d-flex w-25">
+        <label for="Email" class="form-label"><b>Email Id:</b></label>
+        <div>
+            <input type="text" formControlName="Email" class="form-control" id="Email" placeholder="someone@something.com">
+            <div *ngIf="resume.controls['Email']?.touched && resume.controls['Email'].errors?.['email']" class="form-text text-danger">Invalid format.</div>
+        </div>
+    </div>
+
+    <div class="mb-3 d-flex w-25">
+        <label for="Mobile" class="form-label "><b>Phone No:</b></label>
+        <div>
+            <input type="text" formControlName="Mobile" class="form-control" id="Mobile" placeholder="XXX-XXX-XXXX">
+            <div *ngIf="resume.controls['Mobile']?.touched && resume.controls['Mobile'].errors?.['required']" class="form-text  text-danger">This field is required.</div>
+
+        </div>
+    </div>
+
+    <div class="d-flex">
+        <div>
+            <button type="submit" class="btn btn-outline-success">Submit</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,59 @@
+<!-- <User-list> -->
+<h2 class="w-100 text-center">User List</h2>
+
+<!-- <Search> -->
+<div class="w-100 input-group d-flex space-between padding justify-content-center">
+    <div class="w-75 d-flex form-outline">
+        <button type="button" class="btn btn-primary border-radius" routerLink="/Auser/aform">+ Create</button>&nbsp;
+
+        <input type="search" class="form-control border-radius w-25" placeholder="Search By Name">&nbsp;
+        <input type="search" class="form-control border-radius w-25" placeholder="Search By Department">&nbsp;
+        <input type="search" class="form-control border-radius w-25" placeholder="Search By City">
+    </div>
+</div>
+<div *ngIf="AusersListData.length">
+    <table class="table border border-dark">
+        <!-- <Table-header> -->
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>fullname</th>
+                <th>email</th>
+                <th>mobile</th>
+                <th>gender</th>
+                <th>date</th>
+                <th>department</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <!-- <Table-body> -->
+        <tbody>
+            <tr *ngFor="let Auser of AusersListData let i=index">
+
+                <td>{{Auser.id}}</td>
+                <td>{{Auser.fullname}}</td>
+                <td>{{Auser.email}}</td>
+                <td>{{Auser.mobile}}</td>
+                <td>{{Auser.gender}}</td>
+                <td>{{Auser.date}}</td>
+                <td>{{Auser.department}}</td>
+
+                <td>
+                    <a routerLink="/aedit/{{Auser.id}}">Edit</a>&nbsp;
+                    <i class="fas fa-trash-alt" (click)="deleteUser(Auser.id)">Delete</i>&nbsp;
+                    <i class="" (click)="(Auser.id)">Details</i>&nbsp;
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<!-- <Address section> -->
+<div *ngIf="!AusersListData.length">No data found...</div>
+<div class="padding w-100 border border-dark">
+    <h2 class="w=75 text-left"><label for="Search">Add Address</label></h2><br>
+    <input type="text">&nbsp;
+    <button type="button" class="btn btn-secondary">Add</button>
+</div>

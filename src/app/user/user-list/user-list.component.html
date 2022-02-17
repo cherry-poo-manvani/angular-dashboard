@@ -1,0 +1,84 @@
+<!-- <div class="input-group">
+    <div class="form-outline">
+      <input type="search" id="form1" class="form-control" />
+      <label class="form-label" for="form1">Search</label>
+    </div>
+    <button type="button" class="btn btn-primary">
+      <i class="fas fa-search"></i>
+    </button>
+    <button class="btn btn-primary" routerLink="/form" routerLinkActive="active">ADD</button>
+  </div>
+<table>
+    <thead>
+        <th>id</th>
+        <th>firstname</th>
+        <th>lastname</th>
+        <th>email</th>
+        <th>mobile</th>
+        <th>gender</th>
+        <th>date</th>
+        <th>department</th>
+        <th>Action</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of usersListData; let i=index">
+        
+          <td>{{user.id}}</td>
+          <td>{{user.firstname}}</td>
+          <td>{{user.lastname}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.mobile}}</td>
+          <td>{{user.date}}</td>
+          <td>{{user.department}}</td>
+      
+          <td>
+              <i class="fas fa-edit me-2" >Edit</i>
+              <i class="fas fa-trash-alt"  >Delete</i>
+          </td>
+      </tr>
+  </tbody>
+</table> -->
+<div class="input-group">
+    <div class="form-outline">
+        <input type="search" id="form1" class="form-control" [(ngModel)]="Searchname">
+        <label class="form-label" for="form1">Search</label>
+    </div>
+    <button type="button" class="btn btn-primary" routerLink="/form" routerLinkActive="active">ADD</button>
+</div>
+<div *ngIf="usersListData.length">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>firstname</th>
+                <th>lastname</th>
+                <th>email</th>
+                <th>mobile</th>
+                <th>gender</th>
+                <th>date</th>
+                <th>department</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of usersListData  let i=index">
+
+                <td>{{user.id}}</td>
+                <td>{{user.firstname }}</td>
+                <td>{{user.lastname}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.mobile}}</td>
+                <td>{{user.gender}}</td>
+                <td>{{user.date}}</td>
+                <td>{{user.department | departmentfilter:departments }}</td>
+
+                <td>
+                    <a routerLink="/edit/{{user.id}}">Edit</a>
+                    <i class="fas fa-trash-alt" (click)="deleteUser(user.id)">Delete</i>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+<div *ngIf="!usersListData.length">No data found...</div>
