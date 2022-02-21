@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     children: [
-      { path: '', component: AuserListComponent},
+      { path: '', component: AuserListComponent, pathMatch: 'full'},
       { path: 'alist', component: AuserListComponent},
       {path: 'aform', component: AuserFormComponent},
       {path: 'aedit/:id',component: AuserFormComponent}

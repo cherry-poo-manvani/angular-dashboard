@@ -38,13 +38,15 @@
       </tr>
   </tbody>
 </table> -->
-<div class="input-group">
-    <div class="form-outline">
-        <input type="search" id="form1" class="form-control" [(ngModel)]="Searchname">
-        <label class="form-label" for="form1">Search</label>
+<div class="input-group ">
+    <div class="form-outline spacebetween d-flex">
+        <input type="search" id="form1" class="border-radius form-control" [(ngModel)]="Searchname" placeholder="Search">
+
+
+        <button type="button" class="border-radius btn" routerLink="/form" routerLinkActive="active">ADD</button>
     </div>
-    <button type="button" class="btn btn-primary" routerLink="/form" routerLinkActive="active">ADD</button>
 </div>
+
 <div *ngIf="usersListData.length">
     <table class="table">
         <thead>
