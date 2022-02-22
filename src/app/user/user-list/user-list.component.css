@@ -13,10 +13,31 @@
 .form-control {
     height: 35px;
     width: 250px;
-    text-align: center;
+    margin: 0;
+    padding-left: 40px;
 }
 
 .btn {
     height: 35px;
     width: 120px;
+    background-color: #2f55e3;
+    color: aliceblue;
+}
+
+.searchicon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.form-head {
+    position: relative;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
 }
